@@ -9,22 +9,22 @@ import { existsSync } from 'fs';
 const { values } = parseArgs({
     args: Bun.argv,
     options: {
-	example: {
-	    type: 'boolean',
-	    short: 'e',
-	    default: false,
-	},
+        example: {
+            type: 'boolean',
+            short: 'e',
+            default: false,
+        },
 
-	day: {
-	    type: 'string',
-	    short: 'd',
-	},
+        day: {
+            type: 'string',
+            short: 'd',
+        },
 
-	part: {
-	    type: 'string',
-	    short: 'p',
-	    default: '0'
-	},
+        part: {
+            type: 'string',
+            short: 'p',
+            default: '0'
+        },
     },
     strict: true,
     allowPositionals: true
@@ -89,8 +89,8 @@ for (const day of daysToRun) {
     const formattedDayNumber = dayNumber.toLocaleString('en-US', { minimumIntegerDigits: 2 });
 
     if (values.day && (isNaN(parseInt(values.day)) || !existsSync(`puzzles/${formattedDayNumber}`))) {
-	console.log(chalk.red('The provided day is not valid!\n'));
-	exit(1);
+        console.log(chalk.red('The provided day is not valid!\n'));
+        exit(1);
     }
 
     const input = await getPuzzleInput(dayNumber, values.example || false);
@@ -101,11 +101,11 @@ for (const day of daysToRun) {
     console.log(chalk.blue(`• Day ${dayNumber}`))
 
     if (part === '0' || part === '1') {
-	totalTime += runPuzzlePartAndPrintOutput(puzzle, 1, input, values.example || false);
+         totalTime += runPuzzlePartAndPrintOutput(puzzle, 1, input, values.example || false);
     }
 
     if (part === '0' || part === '2') {
-	totalTime += runPuzzlePartAndPrintOutput(puzzle, 2, input, values.example || false);
+         totalTime += runPuzzlePartAndPrintOutput(puzzle, 2, input, values.example || false);
     }
 
     console.log();
