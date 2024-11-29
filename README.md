@@ -1,15 +1,5 @@
-# aoc2024
+# AoC 2024
 
-To install dependencies:
+My solutions for the [Advent of Code 2024](https://adventofcode.com/) puzzle in TypeScript (using the bun runtime). This also includes a puzzle runner.
 
-```bash
-bun install
-```
-
-To run:
-
-```bash
-bun run index.ts
-```
-
-This project was created using `bun init` in bun v1.1.37. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+![image](https://github.com/user-attachments/assets/9d51b98c-5d6c-4dd4-8f0d-1be4a353f519)
