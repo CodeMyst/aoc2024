@@ -53,7 +53,7 @@ const getPuzzle = async (day: number): Promise<PuzzleSolver> => {
 const runPuzzlePartAndMeasureTime = (puzzlePart: PuzzlePart, input: string): { output: number, elapsed: number } => {
     const start = performance.now();
 
-    let output = puzzlePart.solve(input);
+    const output = puzzlePart.solve(input);
 
     const elapsed = performance.now() - start;
 
