@@ -31,7 +31,7 @@ const { values } = parseArgs({
 });
 
 const getAllDays = async (): Promise<string[]> => {
-    return await readdir('puzzles/');
+    return (await readdir('puzzles/')).sort();
 };
 
 const getPuzzleInput = async (day: number, example: boolean): Promise<string> => {
