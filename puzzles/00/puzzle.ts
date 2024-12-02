@@ -1,4 +1,4 @@
-import type { PuzzleSolver } from "../../core";
+import type { PuzzleSolver } from '../../core';
 
 export const solve: PuzzleSolver = {
     part1: {
