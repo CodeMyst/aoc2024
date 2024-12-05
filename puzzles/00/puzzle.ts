@@ -5,7 +5,7 @@ export const solve: PuzzleSolver = {
         expectedResult: { example: 3, full: 12 },
 
         solve: (input: string): number => {
-             return input.trim().length;
+            return input.trim().length;
         }
     },
 
@@ -13,7 +13,7 @@ export const solve: PuzzleSolver = {
         expectedResult: { example: 4, full: 13 },
 
         solve: (input: string): number => {
-             return input.trim().length + 1;
+            return input.trim().length + 1;
         }
     }
 };
