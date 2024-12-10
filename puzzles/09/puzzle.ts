@@ -81,7 +81,7 @@ export const solve: PuzzleSolver = {
     },
 
     part2: {
-        expectedResult: { example: 4, full: 6_488_291_456_470 },
+        expectedResult: { example: 2858, full: 6_488_291_456_470 },
 
         solve: (input: string): number => {
             const blocks = parseBlocks(input);
