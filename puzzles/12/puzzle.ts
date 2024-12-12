@@ -101,7 +101,7 @@ export const solve: PuzzleSolver = {
     },
 
     part2: {
-        expectedResult: { example: 4, full: 13 },
+        expectedResult: { example: 1206, full: 885_394},
 
         solve: (input: string): number => {
             type Tile = {
@@ -129,84 +129,61 @@ export const solve: PuzzleSolver = {
 
                 currentArea += 1;
 
-                let sides = 0;
-
-                let left: Tile | null = null;
                 if (x > 0) {
-                    left = map[y][x-1];
+                    const left = map[y][x-1];
                     if (left.type === current.type) {
                         const [ area, perimeter ] = getRegionAreaAndPerimeter(x-1, y, 0, 0);
                         currentArea += area;
                         currentPerimeter += perimeter;
-                        sides++;
-                    } else {
-                        // currentPerimeter += 1;
                     }
-                } else {
-                    // currentPerimeter += 1;
                 }
 
-                let right: Tile | null = null
                 if (x < map[y].length - 1) {
-                    right = map[y][x+1];
+                    const right = map[y][x+1];
                     if (right.type === current.type) {
                         const [ area, perimeter ] = getRegionAreaAndPerimeter(x+1, y, 0, 0);
                         currentArea += area;
                         currentPerimeter += perimeter;
-                        sides++;
-                    } else {
-                        // currentPerimeter += 1;
                     }
-                } else {
-                    // currentPerimeter += 1;
                 }
 
-                let top: Tile | null = null
                 if (y > 0) {
-                    top = map[y-1][x];
+                    const top = map[y-1][x];
                     if (top.type === current.type) {
                         const [ area, perimeter ] = getRegionAreaAndPerimeter(x, y-1, 0, 0);
                         currentArea += area;
                         currentPerimeter += perimeter;
-                        sides++;
-                    } else {
-                        // currentPerimeter += 1;
                     }
-                } else {
-                    // currentPerimeter += 1;
                 }
 
-                let bottom: Tile | null = null
                 if (y < map.length - 1) {
-                    bottom = map[y+1][x];
+                    const bottom = map[y+1][x];
                     if (bottom.type === current.type) {
                         const [ area, perimeter ] = getRegionAreaAndPerimeter(x, y+1, 0, 0);
                         currentArea += area;
                         currentPerimeter += perimeter;
-                        sides++;
-                    } else {
-                        // currentPerimeter += 1;
                     }
-                } else {
-                    // currentPerimeter += 1;
                 }
 
-                const hasTop = top && top.type !== current.type;
-                const hasBottom = bottom && bottom.type !== current.type;
-                const hasLeft = left && left.type !== current.type;
-                const hasRight = right && right.type !== current.type;
+                const isEdge = (x: number, y: number) => {
+                    if (x < 0 || y < 0 || y >= map.length || x >= map[y].length) return true;
 
-                if (sides === 0) {
-                    currentPerimeter += 4;
-                } else if (hasTop && hasRight && !hasLeft && !hasBottom) {
-                    currentPerimeter += 2;
-                } else if (hasTop && hasLeft && !hasBottom && !hasRight) {
-                    currentPerimeter += 2;
-                } else if (hasLeft && hasBottom && !hasTop && !hasRight) {
-                    currentPerimeter += 2;
-                } else if (hasBottom && hasRight && !hasLeft && !hasTop) {
-                    currentPerimeter += 2;
-                }
+                    return map[y][x].type !== current.type;
+                };
+
+                const topLeft = isEdge(x-1, y-1);
+                const top = isEdge(x, y-1);
+                const topRight = isEdge(x+1, y-1);
+                const right = isEdge(x+1, y);
+                const bottomRight = isEdge(x+1, y+1);
+                const bottom = isEdge(x, y+1);
+                const bottomLeft = isEdge(x-1, y+1);
+                const left = isEdge(x-1, y);
+
+                if ((left && top) || ((!left && !top) && topLeft)) currentPerimeter++;
+                if ((left && bottom) || ((!left && !bottom) && bottomLeft)) currentPerimeter++;
+                if ((right && top) || ((!right && !top) && topRight)) currentPerimeter++;
+                if ((right && bottom) || ((!right && !bottom) && bottomRight)) currentPerimeter++;
 
                 return [currentArea, currentPerimeter];
             };
