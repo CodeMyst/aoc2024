@@ -107,8 +107,6 @@ for (const day of daysToRun) {
     if (part === '0' || part === '2') {
          totalTime += runPuzzlePartAndPrintOutput(puzzle, 2, input, values.example || false);
     }
-
-    console.log();
 }
 
 const totalTimeFormatted = totalTime.toLocaleString('en-US', { maximumFractionDigits: 2 })
