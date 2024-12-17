@@ -1,4 +1,6 @@
-export type PuzzleFunction = (input: string) => number;
+export type PuzzleOutput = number | bigint | string;
+
+export type PuzzleFunction = (input: string) => PuzzleOutput;
 
 export type PuzzlePart = {
     expectedResult: ExpectedResult;
@@ -6,8 +8,8 @@ export type PuzzlePart = {
 };
 
 export type ExpectedResult = {
-    example: number;
-    full: number;
+    example: PuzzleOutput;
+    full: PuzzleOutput;
 };
 
 export type PuzzleSolver = {

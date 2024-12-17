@@ -3,7 +3,7 @@ import { readFile } from 'fs/promises';
 import { readdir } from 'fs/promises';
 import { exit } from 'process';
 import { parseArgs } from 'util';
-import type { PuzzlePart, PuzzleSolver } from './core';
+import type { PuzzleOutput, PuzzlePart, PuzzleSolver } from './core';
 import { existsSync } from 'fs';
 
 const { values } = parseArgs({
@@ -50,7 +50,7 @@ const getPuzzle = async (day: number): Promise<PuzzleSolver> => {
     return puzzle.solve!;
 };
 
-const runPuzzlePartAndMeasureTime = (puzzlePart: PuzzlePart, input: string): { output: number, elapsed: number } => {
+const runPuzzlePartAndMeasureTime = (puzzlePart: PuzzlePart, input: string): { output: PuzzleOutput, elapsed: number } => {
     const start = performance.now();
 
     const output = puzzlePart.solve(input);
