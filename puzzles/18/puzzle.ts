@@ -1,6 +1,6 @@
 import type { PuzzleSolver } from '../../core';
 
-const getPathLength = (walls: string[]): number | null => {
+const getPathLength = (walls: Set<string>): number | null => {
     const start: [number, number] = [0, 0];
     const end: [number, number] = [70, 70];
 
@@ -44,7 +44,7 @@ const getPathLength = (walls: string[]): number | null => {
             const ny = current[1] + dir.y;
 
             if (!inBounds(nx, ny) || visited[nx][ny]) continue;
-            if (walls.includes(`${nx},${ny}`)) continue;
+            if (walls.has(`${nx},${ny}`)) continue;
 
             const newDistance = currentDistance + 1;
             if (newDistance <= distances[nx][ny]) {
@@ -64,7 +64,7 @@ export const solve: PuzzleSolver = {
         solve: (input: string): number => {
             const walls = input.split('\n').filter(l => l.length > 1).slice(0, 1024);
 
-            return getPathLength(walls)!;
+            return getPathLength(new Set(walls))!;
         }
     },
 
@@ -80,7 +80,7 @@ export const solve: PuzzleSolver = {
             while (low <= high) {
                 const mid = Math.floor((low + high) / 2);
 
-                if (getPathLength(mapInput.slice(0, mid))) {
+                if (getPathLength(new Set(mapInput.slice(0, mid)))) {
                     result = mid;
                     low = mid + 1;
                 } else {
